@@ -1,0 +1,52 @@
+/* STREAMING_CHUNK:Defining Custom Pixel Styles & Font Configuration... */
+
+body {
+
+font-family: 'Press Start 2P', monospace;
+
+background-color: #0b0f19;
+
+color: #d1d5db;
+
+overflow-x: hidden;
+
+touch-action: manipulation;
+
+}
+
+​/* Custom Pixel Border Utility */
+
+.pixel-border {
+
+box-shadow: 4px 4px 0px 0px #374151;
+
+border: 2px solid #9ca3af;
+
+}
+
+​/* Pixel Button Press Effect */
+
+.pixel-btn {
+
+transition: transform 0.1s ease, box-shadow 0.1s ease;
+
+}
+
+​.pixel-btn:active {
+
+transform: translate(2px, 2px);
+
+box-shadow: 2px 2px 0px 0px #374151;
+
+}
+
+​/* Crisp Retro Pixel Rendering on Canvas */
+
+canvas {
+
+image-rendering: pixelated;
+
+image-rendering: crisp-edges;
+
+}
+
