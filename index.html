@@ -1,85 +1,98 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Death Stranding: Pixel Delivery Simulator</title>
-    <!-- Tailwind CSS for utility styling -->
+    <title>Death Stranding: Relaxed Delivery Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Font for Pixel Retro look -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-[#07090e] min-h-screen flex flex-col items-center justify-between p-4 sm:p-6 select-none">
+<body class="bg-[#07090e] min-h-screen flex flex-col items-center justify-between p-2 sm:p-4">
 
-    <header class="w-full max-w-2xl text-center mb-4">
-        <h1 class="text-xs sm:text-sm text-cyan-400 tracking-widest mb-1">BRIDGES LOGISTICS CORP</h1>
-        <h2 class="text-lg sm:text-2xl text-white font-bold tracking-wider">DEATH STRANDING: PIXEL PORT</h2>
-        <div class="h-1 bg-cyan-600 w-full mt-3"></div>
+    <header class="w-full max-w-2xl text-center mb-2">
+        <h1 class="text-[9px] sm:text-[10px] text-cyan-400 tracking-widest mb-1">BRIDGES LOGISTICS CORP // UCA NETWORK</h1>
+        <h2 class="text-sm sm:text-lg text-white font-bold tracking-wider">DEATH STRANDING: PIXEL DELIVERY ADVENTURE</h2>
+        <div class="h-1 bg-gradient-to-r from-cyan-600 via-yellow-500 to-purple-600 w-full mt-1"></div>
     </header>
 
     <main class="w-full max-w-2xl flex flex-col items-center">
-        <!-- Dashboard Stats -->
-        <div class="w-full grid grid-cols-3 gap-2 mb-3 text-[10px] sm:text-xs">
-            <div class="pixel-border bg-gray-900 p-2 text-center">
-                <span class="text-gray-400 block mb-1">CARGO</span>
-                <span id="cargo-weight" class="text-yellow-400 font-bold">15.0 KG</span>
+        <!-- Dashboard Indicator Stats -->
+        <div class="w-full grid grid-cols-5 gap-1 mb-2 text-[8px] sm:text-[9px]">
+            <div class="pixel-border bg-gray-900 p-1.5 text-center">
+                <span class="text-gray-400 block mb-0.5">PAKET UCA</span>
+                <span id="delivery-count" class="text-cyan-400 font-bold">0 / 3</span>
             </div>
-            <div class="pixel-border bg-gray-900 p-2 text-center">
-                <span class="text-gray-400 block mb-1">TIMEFALL</span>
-                <span id="weather-status" class="text-cyan-400 font-bold">CLEAR</span>
+            <div class="pixel-border bg-gray-900 p-1.5 text-center">
+                <span class="text-gray-400 block mb-0.5">BEBAN CARGO</span>
+                <span id="cargo-weight" class="text-yellow-400 font-bold">45 KG</span>
             </div>
-            <div class="pixel-border bg-gray-900 p-2 text-center">
-                <span class="text-gray-400 block mb-1">STATUS</span>
-                <span id="game-status" class="text-green-400 font-bold">READY</span>
+            <div class="pixel-border bg-gray-900 p-1.5 text-center">
+                <span class="text-gray-400 block mb-0.5">STAMINA</span>
+                <span id="stamina-status" class="text-green-400 font-bold">100%</span>
+            </div>
+            <div class="pixel-border bg-gray-900 p-1.5 text-center">
+                <span class="text-gray-400 block mb-0.5">BOLA GUN</span>
+                <span id="ammo-status" class="text-amber-400 font-bold">8 AMMO</span>
+            </div>
+            <div class="pixel-border bg-gray-900 p-1.5 text-center">
+                <span class="text-gray-400 block mb-0.5">CUACA</span>
+                <span id="weather-status" class="text-cyan-400 font-bold">CERAH</span>
             </div>
         </div>
 
-        <!-- Game Screen Canvas Wrapper -->
-        <div class="relative w-full aspect-[16/9] pixel-border bg-gray-950 overflow-hidden">
+        <!-- Game Screen Canvas -->
+        <div class="relative w-full aspect-[16/9] pixel-border bg-gray-950 overflow-hidden shadow-2xl">
             <canvas id="gameCanvas" class="w-full h-full block"></canvas>
+            <div class="absolute inset-0 crt-scanline opacity-40"></div>
             
-            <!-- Overlay Screen for Start / Game Over -->
-            <div id="overlay-screen" class="absolute inset-0 bg-black/85 flex flex-col items-center justify-center p-4 text-center z-10">
-                <h3 id="overlay-title" class="text-sm sm:text-lg text-cyan-400 mb-4 leading-relaxed">SAM PORTER BRIDGES<br>READY FOR DELIVERY?</h3>
-                <p id="overlay-desc" class="text-[9px] sm:text-xs text-gray-400 mb-6 max-w-md leading-relaxed">
-                    Gunakan tombol arah atau navigasi sentuh untuk menyeimbangkan beban, hindari BTs (Makhluk Chiral), dan bawa kargo ke Terminal UCA!
+            <!-- Modal Overlay Screen -->
+            <div id="overlay-screen" class="absolute inset-0 bg-black/90 flex flex-col items-center justify-center p-4 text-center z-10">
+                <h3 id="overlay-title" class="text-xs sm:text-sm text-cyan-400 mb-2 leading-relaxed">SAM PORTER BRIDGES<br>PENGIRIMAN SANTAI UCA</h3>
+                <p id="overlay-desc" class="text-[8px] sm:text-[10px] text-gray-300 mb-4 max-w-md leading-relaxed">
+                    Nikmati perjalanan dan antarkan <span class="text-cyan-400 font-bold">3 Paket Kargo</span> ke Terminal Pos UCA!<br>
+                    • Gameplay santai: Sam akan menyeimbangkan beban otomatis.<br>
+                    • Singgah di <span class="text-green-400 font-bold">POS UCA</span> untuk menurunkan kargo & menyegarkan stamina.<br>
+                    • Nikmati pemandangan pagi pegunungan Chiral tanpa tekanan!
                 </p>
-                <button onclick="startGame()" class="pixel-btn bg-cyan-600 hover:bg-cyan-500 text-white text-xs sm:text-sm px-6 py-3 pixel-border border-cyan-400">
-                    MULAI MISI
+                <button onclick="startGame()" class="pixel-btn bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-5 py-2.5 pixel-border border-cyan-400 font-bold tracking-wider">
+                    MULAI PERJALANAN SANTAI
                 </button>
             </div>
         </div>
 
-        <!-- Control Buttons -->
-        <div class="w-full grid grid-cols-2 gap-4 mt-4">
+        <!-- Controls Section -->
+        <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
             <div class="flex gap-2">
-                <button ontouchstart="setMove(-1)" onmousedown="setMove(-1)" onmouseup="setMove(0)" ontouchend="setMove(0)" class="flex-1 pixel-btn bg-gray-800 hover:bg-gray-700 text-cyan-400 py-3 text-xs pixel-border text-center">
-                    ◀ KIRI
+                <button ontouchstart="setMove(-1)" onmousedown="setMove(-1)" onmouseup="setMove(0)" ontouchend="setMove(0)" class="flex-1 pixel-btn bg-gray-800 hover:bg-gray-700 text-cyan-400 py-2.5 text-[9px] pixel-border font-bold">
+                    ◀ JALAN KIRI
                 </button>
-                <button ontouchstart="setMove(1)" onmousedown="setMove(1)" onmouseup="setMove(0)" ontouchend="setMove(0)" class="flex-1 pixel-btn bg-gray-800 hover:bg-gray-700 text-cyan-400 py-3 text-xs pixel-border text-center">
-                    KANAN ▶
+                <button ontouchstart="setMove(1)" onmousedown="setMove(1)" onmouseup="setMove(0)" ontouchend="setMove(0)" class="flex-1 pixel-btn bg-gray-800 hover:bg-gray-700 text-cyan-400 py-2.5 text-[9px] pixel-border font-bold">
+                    JALAN KANAN ▶
                 </button>
             </div>
-            <div class="flex gap-2">
-                <button onclick="triggerBalance()" class="flex-1 pixel-btn bg-yellow-700 hover:bg-yellow-600 text-white py-3 text-xs pixel-border text-center font-bold">
-                    [T] SEIMBANGKAN
+            <div class="grid grid-cols-4 gap-1.5">
+                <button onclick="triggerShoot()" class="pixel-btn bg-amber-700 hover:bg-amber-600 text-white py-2.5 text-[8px] pixel-border font-bold text-center">
+                    TEMBAK
                 </button>
-                <button onclick="triggerOdradek()" class="flex-1 pixel-btn bg-blue-800 hover:bg-blue-700 text-white py-3 text-xs pixel-border text-center font-bold">
-                    [O] ODRADEK
+                <button onclick="triggerBalance()" class="pixel-btn bg-yellow-700 hover:bg-yellow-600 text-white py-2.5 text-[8px] pixel-border font-bold text-center">
+                    SEIMBANG
+                </button>
+                <button onclick="triggerOdradek()" class="pixel-btn bg-blue-800 hover:bg-blue-700 text-white py-2.5 text-[8px] pixel-border font-bold text-center">
+                    ODRADEK
+                </button>
+                <button onclick="triggerHoldBreath()" class="pixel-btn bg-purple-800 hover:bg-purple-700 text-white py-2.5 text-[8px] pixel-border font-bold text-center">
+                    TAHAN NAPAS
                 </button>
             </div>
         </div>
     </main>
 
-    <footer class="w-full max-w-2xl text-center mt-6 text-[9px] sm:text-[10px] text-gray-500 leading-relaxed">
-        <p>Vercel </p>
-        <p class="mt-1">Bridges Corporation © 2026</p>
+    <footer class="w-full max-w-2xl text-center mt-2 text-[8px] text-gray-500 leading-relaxed">
+        <p>Bridges Logistics Network • Relaxed Pixel Edition</p>
     </footer>
 
-    <!-- Link to external JavaScript file -->
     <script src="script.js"></script>
 </body>
 </html>
-
