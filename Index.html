@@ -1,0 +1,86 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Death Stranding: Pixel Delivery Simulator</title>
+    <!-- Tailwind CSS for utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font for Pixel Retro look -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#07090e] min-h-screen flex flex-col items-center justify-between p-4 sm:p-6 select-none">
+
+    <header class="w-full max-w-2xl text-center mb-4">
+        <h1 class="text-xs sm:text-sm text-cyan-400 tracking-widest mb-1">BRIDGES LOGISTICS CORP</h1>
+        <h2 class="text-lg sm:text-2xl text-white font-bold tracking-wider">DEATH STRANDING: PIXEL PORT</h2>
+        <div class="h-1 bg-cyan-600 w-full mt-3"></div>
+    </header>
+
+    <main class="w-full max-w-2xl flex flex-col items-center">
+        <!-- Dashboard Stats -->
+        <div class="w-full grid grid-cols-3 gap-2 mb-3 text-[10px] sm:text-xs">
+            <div class="pixel-border bg-gray-900 p-2 text-center">
+                <span class="text-gray-400 block mb-1">CARGO</span>
+                <span id="cargo-weight" class="text-yellow-400 font-bold">15.0 KG</span>
+            </div>
+            <div class="pixel-border bg-gray-900 p-2 text-center">
+                <span class="text-gray-400 block mb-1">TIMEFALL</span>
+                <span id="weather-status" class="text-cyan-400 font-bold">CLEAR</span>
+            </div>
+            <div class="pixel-border bg-gray-900 p-2 text-center">
+                <span class="text-gray-400 block mb-1">STATUS</span>
+                <span id="game-status" class="text-green-400 font-bold">READY</span>
+            </div>
+        </div>
+
+        <!-- Game Screen Canvas Wrapper -->
+        <div class="relative w-full aspect-[16/9] pixel-border bg-gray-950 overflow-hidden">
+            <canvas id="gameCanvas" class="w-full h-full block"></canvas>
+            
+            <!-- Overlay Screen for Start / Game Over -->
+            <div id="overlay-screen" class="absolute inset-0 bg-black/85 flex flex-col items-center justify-center p-4 text-center z-10">
+                <h3 id="overlay-title" class="text-sm sm:text-lg text-cyan-400 mb-4 leading-relaxed">SAM PORTER BRIDGES<br>READY FOR DELIVERY?</h3>
+                <p id="overlay-desc" class="text-[9px] sm:text-xs text-gray-400 mb-6 max-w-md leading-relaxed">
+                    Gunakan tombol arah atau navigasi sentuh untuk menyeimbangkan beban, hindari BTs (Makhluk Chiral), dan bawa kargo ke Terminal UCA!
+                </p>
+                <button onclick="startGame()" class="pixel-btn bg-cyan-600 hover:bg-cyan-500 text-white text-xs sm:text-sm px-6 py-3 pixel-border border-cyan-400">
+                    MULAI MISI
+                </button>
+            </div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="w-full grid grid-cols-2 gap-4 mt-4">
+            <div class="flex gap-2">
+                <button ontouchstart="setMove(-1)" onmousedown="setMove(-1)" onmouseup="setMove(0)" ontouchend="setMove(0)" class="flex-1 pixel-btn bg-gray-800 hover:bg-gray-700 text-cyan-400 py-3 text-xs pixel-border text-center">
+                    ◀ KIRI
+                </button>
+                <button ontouchstart="setMove(1)" onmousedown="setMove(1)" onmouseup="setMove(0)" ontouchend="setMove(0)" class="flex-1 pixel-btn bg-gray-800 hover:bg-gray-700 text-cyan-400 py-3 text-xs pixel-border text-center">
+                    KANAN ▶
+                </button>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="triggerBalance()" class="flex-1 pixel-btn bg-yellow-700 hover:bg-yellow-600 text-white py-3 text-xs pixel-border text-center font-bold">
+                    [T] SEIMBANGKAN
+                </button>
+                <button onclick="triggerOdradek()" class="flex-1 pixel-btn bg-blue-800 hover:bg-blue-700 text-white py-3 text-xs pixel-border text-center font-bold">
+                    [O] ODRADEK
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full max-w-2xl text-center mt-6 text-[9px] sm:text-[10px] text-gray-500 leading-relaxed">
+        <p>Vercel Ready Deployment: 3-File Architecture.</p>
+        <p class="mt-1">Kopaja & Bridges Corporation © 2026</p>
+    </footer>
+
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
+```
