@@ -1,4 +1,4 @@
-```javascript
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -228,4 +228,3 @@ function loop() {
 window.onload = function() {
     loop();
 };
-```
